@@ -1,0 +1,3 @@
+GET http://localhost:8000/products?page=1
+# GET https://api.themoviedb.org/3/movie/now_playing?page=2
+# Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkOGEzOGM4OTcyNzg4MjI4MTU1MTVlM2E5NDU4NjlhOSIsInN1YiI6IjYwNTViYzg0NmUzZGViMDA1NGU2MzIwNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XPL1XaBqRpQFeNLaN8WKEStJB6I9e8mXvinzN2KYE_I
