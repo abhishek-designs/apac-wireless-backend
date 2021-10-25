@@ -90,7 +90,7 @@ exports.default = {
         name = user.name,
         email = user.email;
 
-    return _jsonwebtoken2.default.sign({ customer_id: customerId, name: name, email: email }, process.env.SECRET, { expiresIn: 86400 });
+    return _jsonwebtoken2.default.sign({ customer_id: customerId, name: name, email: email }, process.env.SECRET, { expiresIn: "1h" });
   },
   validateRegisterDetails: function validateRegisterDetails(user) {
     return _joi2.default.validate(user, _validationSchema2.default.registerSchema, options);

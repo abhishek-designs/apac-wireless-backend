@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 module.exports = function (sequelize, DataTypes) {
-  var Product = sequelize.define('Product', {
+  var Product = sequelize.define("Product", {
     product_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -12,8 +12,16 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(100),
       allowNull: false
     },
+    brand_name: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    model_no: {
+      type: DataTypes.STRING(150),
+      allowNull: false
+    },
     description: {
-      type: DataTypes.STRING(1000),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     price: {
@@ -23,17 +31,13 @@ module.exports = function (sequelize, DataTypes) {
     discounted_price: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-      defaultValue: '0.00'
+      defaultValue: "0.00"
     },
-    ram: {
+    quantity: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    storage: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    inStock: {
+    in_stock: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true
@@ -44,25 +48,37 @@ module.exports = function (sequelize, DataTypes) {
     },
     image: DataTypes.STRING(150),
     image_2: DataTypes.STRING(150),
-    thumbnail: DataTypes.STRING(150)
-    // display:{
-    //     type:DataTypes.INTEGER,
-    //     allowNull: false,
-    //     defaultValue: '0'
-    // },
+    thumbnail: DataTypes.STRING(150),
+    tags: {
+      type: DataTypes.STRING(350),
+      allowNull: false
+    }
   }, {
-    timestamps: false,
-    tableName: 'product'
+    timestamps: true,
+    tableName: "product"
   });
   Product.associate = function (models) {
     // associations can be defined here
     Product.hasMany(models.ProductAttribute, {
-      foreignKey: 'product_id',
-      as: 'productAttributes'
+      foreignKey: "product_id",
+
+      as: "productAttributes"
     });
     Product.belongsToMany(models.Category, {
-      foreignKey: 'product_id',
-      through: 'product_category'
+      foreignKey: "product_id",
+      through: "product_category"
+    });
+    Product.belongsTo(models.Features, {
+      as: "feature",
+      foreignKey: "feature_id"
+    });
+    Product.hasMany(models.RelatedProduct, {
+      as: "related_products",
+      foreignKey: "product_id"
+    });
+    Product.hasMany(models.Review, {
+      as: "reviews",
+      foreignKey: "product_id"
     });
   };
   return Product;

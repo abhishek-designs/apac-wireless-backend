@@ -22,6 +22,9 @@ productRouter.get("/inDepartment", _productController2.default.getProductsInDepa
 productRouter.get("/incategory/:categoryId", _productController2.default.getProductsInCategory);
 productRouter.get("/inDepartment/:departmentId", _productController2.default.getProductsInDepartment);
 productRouter.get("/search", _productController2.default.searchProducts);
+productRouter.get("/related_products", _productController2.default.getRelatedProducts);
 productRouter.get("/:product_id", _productController2.default.getSingleProduct);
-productRouter.post('/', _productController2.default.addProduct);
+productRouter.post("/", _productController2.default.addProduct);
+productRouter.post("/features", _productController2.default.addProductFeatures);
+productRouter.post("/upload", _productController2.default.addUploadedProducts);
 exports.default = productRouter;

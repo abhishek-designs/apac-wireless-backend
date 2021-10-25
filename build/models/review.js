@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 module.exports = function (sequelize, DataTypes) {
-  var Review = sequelize.define('Review', {
+  var Review = sequelize.define("Review", {
     review_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -12,28 +12,28 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    product_id: {
-      type: DataTypes.INTEGER,
+    title: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
-    review: {
+    body: {
       type: DataTypes.TEXT,
       allowNull: false
     },
     rating: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    created_on: {
-      type: DataTypes.DATE,
-      allowNull: false
     }
   }, {
-    timestamps: false,
-    tableName: 'review'
+    timestamps: true,
+    tableName: "review"
   });
   Review.associate = function (models) {
     // associations can be defined here
+    Review.belongsTo(models.Product, {
+      as: "product",
+      foreignKey: "product_id"
+    });
   };
   return Review;
 };

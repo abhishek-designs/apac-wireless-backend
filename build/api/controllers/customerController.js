@@ -102,7 +102,9 @@ var CustomerController = function () {
                 return customer.reload();
 
               case 20:
+                // ?? Find out whats the use of dataValues in this model
                 delete customer.dataValues.password;
+
                 token = createToken(customer);
                 return _context.abrupt("return", res.status(200).json({
                   accessToken: "Bearer " + token,

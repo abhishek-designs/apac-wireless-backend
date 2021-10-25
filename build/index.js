@@ -42,6 +42,10 @@ var _chatController2 = _interopRequireDefault(_chatController);
 
 var _crypto = require("crypto");
 
+var _fs = require("fs");
+
+var _fs2 = _interopRequireDefault(_fs);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -83,10 +87,11 @@ io.on("connection", function (socket) {
   socket.on("chat-request", function (user) {
     var notification = {
       id: socket.id,
+      user: user,
       msg: user.name + " wants to chat with you"
     };
-    console.log(user);
-    // ChatController.triggerGlobalEvents("to-admin", notification);
+    // console.log(user);
+    _chatController2.default.triggerGlobalEvents("to-admin", notification);
   });
 
   socket.on("request-alert", function (alert) {
@@ -133,6 +138,7 @@ io.on("connection", function (socket) {
 
   // ADMIN give indication to client for waiting
   socket.on("client-waiting", function (waiting, id) {
+    console.log(waiting, id);
     // SERVER emit this indicator to specific client
     _chatController2.default.triggerPersonalEvents(id, "on-waiting", waiting);
   });

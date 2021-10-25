@@ -22,17 +22,22 @@ var db = {};
 //     },
 //   }
 // );
-// let sequelize;
-// if (config.use_env_variable) {
-//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
-// } else {
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
-// }
+var sequelize = void 0;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 sequelize.authenticate().then(function () {
   return console.log("connection successful");
 }).catch(function (err) {
   return console.log("connection failed: " + err);
 });
+
+// sequelize
+//   .sync({ alter: true })
+//   .then(() => console.log("Table synced"))
+//   .catch((err) => console.log(`Syncing failed ${err}`));
 
 fs.readdirSync(__dirname).filter(function (file) {
   return file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js";
